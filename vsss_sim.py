@@ -77,12 +77,12 @@ def increment(v, t, controller, setpoint):
 
 ###     Simulation parameters   ###
 Ts = 0.05
-Tf = 50.0
+Tf = 25.0
 t = np.linspace(0, Tf, 1+int(Tf/Ts))
 v0 = [10, 10, np.cos(60*np.pi/180), np.sin(60*np.pi/180)]
 ref = (100, 100)
 robot = robotController(kp=0.2)
-v = integrate.odeint(increment, v0, t, args=(robot, (100, 100), ))
+v = integrate.odeint(increment, v0, t, args=(robot, ref, ))
 
 ###     Simulation results      ###
 ax_pos = plt.subplot(321)
