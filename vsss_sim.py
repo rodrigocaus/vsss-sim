@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def rought_signal(x):
+def rough_signal(x):
     if x >= 0:
         return 1
     else:
@@ -32,8 +32,8 @@ class robotController:
         self.time = [0.0]
 
     def setError(self, x, y, ux, uy, xref, yref):
-        self.left_error = rought_signal(ux*(xref-x) + uy*(yref-y)) * (np.sqrt((xref-x)**2 + (yref-y)**2) - (ux*(yref-y) - uy*(xref-x)))
-        self.right_error = rought_signal(ux*(xref-x) + uy*(yref-y)) * (np.sqrt((xref-x)**2 + (yref-y)**2) + (ux*(yref-y) - uy*(xref-x)))
+        self.left_error = rough_signal(ux*(xref-x) + uy*(yref-y)) * (np.sqrt((xref-x)**2 + (yref-y)**2) - (ux*(yref-y) - uy*(xref-x)))
+        self.right_error = rough_signal(ux*(xref-x) + uy*(yref-y)) * (np.sqrt((xref-x)**2 + (yref-y)**2) + (ux*(yref-y) - uy*(xref-x)))
 
     def pushTime(self, t):
         ''' Called after set both errors '''
@@ -77,11 +77,11 @@ def increment(v, t, controller, setpoint):
 
 ###     Simulation parameters   ###
 Ts = 0.05
-Tf = 25.0
+Tf = 60.0
 t = np.linspace(0, Tf, 1+int(Tf/Ts))
-v0 = [10, 10, np.cos(60*np.pi/180), np.sin(60*np.pi/180)]
+v0 = [10, 10, np.cos(0*np.pi/180), np.sin(0*np.pi/180)]
 ref = (100, 100)
-robot = robotController(kp=0.2)
+robot = robotController(kp=0.05,ki = 0.0002)
 v = integrate.odeint(increment, v0, t, args=(robot, ref, ))
 
 ###     Simulation results      ###

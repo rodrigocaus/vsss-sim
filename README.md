@@ -41,12 +41,29 @@ pode ser a bola, por exemplo.
   <img src="img/controle.png" width="600">
 </p>
 
-Consideramos a função erro, que depende da distância do robô até o _setpoint_ e do
-ângulo que û faz com a reta (ou vetor) que liga o centro do robô ao ponto de referência. O objetivo do controle é
-zerar esse erro.
+Consideramos as funções de erro, uma associada à distancia até o _setpoint_ e outra associada ao
+ângulo que û faz com a reta (ou vetor) que liga o centro do robô ao ponto de referência:
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=e_r(t)&space;=&space;sgn(\hat{u}&space;\cdot&space;\vec{r})&space;|\vec{r}(t)|" target="_blank"><img src="https://latex.codecogs.com/gif.latex?e_r(t)&space;=&space;sgn(\hat{u}&space;\cdot&space;\vec{r})&space;|\vec{r}(t)|" title="e_r(t) = sgn(\hat{u} \cdot \vec{r}) |\vec{r}(t)|" /></a>
+
+<a href="https://www.codecogs.com/eqnedit.php?latex=e_\alpha(t)&space;=&space;sgn(\hat{u}&space;\cdot&space;\vec{r})&space;|\vec{r}(t)|\sin(\alpha)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?e_\alpha(t)&space;=&space;sgn(\hat{u}&space;\cdot&space;\vec{r})&space;|\vec{r}(t)|\sin(\alpha)" title="e_\alpha(t) = sgn(\hat{u} \cdot \vec{r}) |\vec{r}(t)|\sin(\alpha)" /></a>
+
+
+Sendo _sgn_ a função sinal, utilizada para diferenciar a movimentação do robô em frente e trás. 
+O objetivo do controle é zerar esse erro aplicando um valor de velocidade sobre cada motor.
+
+## O simulador com PID
+
+Com o carro partindo da posição (10, 10) na horizontal e _setpoint_ em (100, 100), temos o quadro de simulação:
+
+<p align="center">
+  <img src="img/sim_example.png" width="600">
+</p>
+
+Vale notar que a simulação não é uma anomação (ainda) e executa o modelo de controle por um tempo especificado
+através de resolução numérica de equações diferenciais.
 
 ## Possíveis melhorias
 
- - Possívelmente adotar no modelo de movimentação a ideia de aceleração. Deste modo, poderíamos controlar a velocidade com que
-o robô chega ao _setpoint_
+ - Controlar a velocidade com que o robô chega ao _setpoint_
  - Controlar, além da posição do _setpoint_, o ângulo com que chega ao objetivo.
